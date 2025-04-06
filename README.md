@@ -72,25 +72,7 @@ The solution follows a clean architecture approach with three main projects:
 
 ## 📸 Screenshots
 
-### Home Page
-
-![Home Page](ArticalProject/wwwroot/img/1.jpg)
-
-### Article View
-
-![Article View](ArticalProject/wwwroot/img/2.jpg)
-
-### Admin Dashboard
-
-![Admin Dashboard](ArticalProject/wwwroot/img/3.jpg)
-
-### Dark Mode
-
-![Dark Mode](ArticalProject/wwwroot/img/building.jpg)
-
-### Article Categories
-
-![Categories](ArticalProject/wwwroot/images/77ed5a74-273d-4f39-9029-5fccb51fee36_egyptian_temple.jpg)
+_Coming soon_
 
 ## 🧩 Key Components
 
