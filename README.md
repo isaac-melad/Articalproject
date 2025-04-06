@@ -72,7 +72,21 @@ The solution follows a clean architecture approach with three main projects:
 
 ## 📸 Screenshots
 
-_Coming soon_
+### Home Page
+
+![Home Page](ArticalProject/screenshots/screenshot_1743959752529.png)
+
+### Article Detail
+
+![Article Detail](ArticalProject/screenshots/screenshot_1743959779042.png)
+
+### Author Dashboard
+
+![Author Dashboard](ArticalProject/screenshots/screenshot_1743959809622.png)
+
+### Category View
+
+![Category View](ArticalProject/screenshots/screenshot_1743959856717.png)
 
 ## 🧩 Key Components
 
