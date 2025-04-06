@@ -1,0 +1,50 @@
+@model ArticalProject.Core.Models.Author
+
+@{
+    ViewData["Title"] = "حذف الكاتب";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>هل أنت متأكد من حذف هذا الكاتب؟</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+
+        @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProfileImageUrl)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Model.ProfileImageUrl" alt="صورة الكاتب" style="max-width: 200px;" />
+            </dd>
+        }
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="حذف" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">رجوع للقائمة</a>
+    </form>
+</div>

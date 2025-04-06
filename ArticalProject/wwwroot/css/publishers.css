@@ -1,0 +1,137 @@
+/* Publishers Page Styles */
+
+.publishers-container {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.publishers-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.publishers-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.publishers-subtitle {
+    font-size: 1.05rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.publisher-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.publisher-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.publisher-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+    margin-top: -60px;
+}
+
+.publisher-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.publisher-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.publisher-bio {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.publisher-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+.publisher-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .publisher-image {
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+    }
+    
+    .publisher-name {
+        font-size: 1.15rem;
+    }
+    
+    .publisher-stats {
+        gap: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.05rem;
+    }
+}

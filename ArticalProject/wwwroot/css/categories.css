@@ -1,0 +1,100 @@
+/* Categories Page Styles */
+
+.category-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.category-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.category-card:hover .btn {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
+.category-card .btn {
+    transition: all 0.3s ease;
+}
+
+/* Animation styles */
+.reveal-delay-1 {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal-delay-1.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+
+.breadcrumb-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+/* Empty state styling */
+.empty-state-container {
+    padding: 3rem;
+    transition: all 0.3s ease;
+}
+
+.empty-state-icon {
+    display: inline-block;
+    padding: 2rem;
+    border-radius: 50%;
+    background-color: rgba(var(--primary-color-rgb), 0.05);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.empty-state-container:hover .empty-state-icon {
+    transform: scale(1.1) rotate(10deg);
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+}

@@ -1,0 +1,27 @@
+﻿@page
+@using ArticalProject.Areas.Identity.Pages.Account.Manage
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Disable2faModel
+@{
+    ViewData["Title"] = "تعطيل المصادقة الثنائية (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <strong>هذه العملية تعطل فقط المصادقة الثنائية.</strong>
+    </p>
+    <p>
+        تعطيل المصادقة الثنائية لا يغير المفاتيح المستخدمة في تطبيقات المصادقة. إذا كنت ترغب في تغيير المفتاح
+        المستخدم في تطبيق المصادقة، يجب عليك <a asp-page="./ResetAuthenticator">إعادة تعيين مفاتيح المصادقة الخاصة بك.</a>
+    </p>
+</div>
+
+<div>
+    <form method="post">
+        <button class="btn btn-danger" type="submit">تعطيل 2FA</button>
+    </form>
+</div>

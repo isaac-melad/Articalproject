@@ -1,0 +1,29 @@
+﻿@page
+@using ArticalProject.Areas.Identity.Pages.Account.Manage
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GenerateRecoveryCodesModel
+@{
+    ViewData["Title"] = "إنشاء رموز استرداد المصادقة الثنائية (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>ضع هذه الرموز في مكان آمن.</strong>
+    </p>
+    <p>
+        إذا فقدت جهازك وليس لديك رموز الاسترداد، ستفقد الوصول إلى حسابك.
+    </p>
+    <p>
+        إنشاء رموز استرداد جديدة لا يغير المفاتيح المستخدمة في تطبيقات المصادقة. إذا كنت ترغب في تغيير المفتاح
+        المستخدم في تطبيق المصادقة، يجب عليك <a asp-page="./ResetAuthenticator">إعادة تعيين مفاتيح المصادقة الخاصة بك.</a>
+    </p>
+</div>
+<div>
+    <form method="post">
+        <button class="btn btn-danger" type="submit">إنشاء رموز استرداد</button>
+    </form>
+</div>

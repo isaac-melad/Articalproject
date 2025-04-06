@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<div class="account-nav-container">
+    <div class="user-info mb-4">
+        <div class="user-avatar">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-details mt-2">
+            <h6 class="mb-0">@User.Identity?.Name</h6>
+            <small class="text-muted">الحساب الشخصي</small>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills flex-column nav-custom">
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center @ManageNavPages.IndexNavClass(ViewContext)" id="profile"
+                asp-page="./Index">
+                <i class="fas fa-user me-2"></i>
+                <span>الملف الشخصي</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center @ManageNavPages.EmailNavClass(ViewContext)" id="email"
+                asp-page="./Email">
+                <i class="fas fa-envelope me-2"></i>
+                <span>البريد الإلكتروني</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center @ManageNavPages.ChangePasswordNavClass(ViewContext)"
+                id="change-password" asp-page="./ChangePassword">
+                <i class="fas fa-key me-2"></i>
+                <span>كلمة المرور</span>
+            </a>
+        </li>
+        @if (hasExternalLogins)
+        {
+            <li id="external-logins" class="nav-item">
+                <a id="external-login"
+                    class="nav-link d-flex align-items-center @ManageNavPages.ExternalLoginsNavClass(ViewContext)"
+                    asp-page="./ExternalLogins">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    <span>تسجيلات دخول خارجية</span>
+                </a>
+            </li>
+        }
+
+        <li class="nav-divider my-3"></li>
+
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"
+                id="two-factor" asp-page="./TwoFactorAuthentication">
+                <i class="fas fa-shield-alt me-2"></i>
+                <span>المصادقة الثنائية</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center @ManageNavPages.PersonalDataNavClass(ViewContext)"
+                id="personal-data" asp-page="./PersonalData">
+                <i class="fas fa-user-shield me-2"></i>
+                <span>البيانات الشخصية</span>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,65 @@
+@model IEnumerable<ArticalProject.Core.Models.Category>
+@{
+    ViewData["Title"] = "التصنيفات";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/categories.css">
+}
+
+<div class="rtl" style="font-family: 'Cairo', sans-serif; line-height: 1.8;" dir="rtl">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold mb-3">تصنيفات المقالات</h1>
+                <p class="lead text-muted">تصفح المقالات حسب التصنيف</p>
+                <div class="mx-auto mt-3" style="height: 4px; width: 100px; background: linear-gradient(90deg, transparent, var(--primary-color), transparent); border-radius: 4px;"></div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var category in Model)
+            {
+                <div class="col-md-6 col-lg-4 reveal-delay-1">
+                    <a asp-controller="Home" asp-action="PostsByCategory" asp-route-categoryId="@category.Id" class="text-decoration-none">
+                        <div class="category-card bg-white h-100 rounded-4 shadow-sm overflow-hidden hover-lift"
+                             style="transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(0,0,0,0.03);">
+                            <div class="p-4 d-flex flex-column align-items-center text-center">
+                                <div class="category-icon mb-3">
+                                    <i class="fas fa-folder-open fa-3x text-primary"></i>
+                                </div>
+                                <h3 class="h4 fw-bold mb-3">@category.Name</h3>
+                                <p class="text-muted mb-3">
+                                    @if (category.Posts != null && category.Posts.Any())
+                                    {
+                                        <span>@category.Posts.Count() مقالة</span>
+                                    }
+                                    else
+                                    {
+                                        <span>لا توجد مقالات</span>
+                                    }
+                                </p>
+                                <div class="mt-auto">
+                                    <span class="btn btn-primary rounded-pill px-4 shadow-sm">
+                                        تصفح المقالات <i class="fas fa-arrow-left ms-2"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Activate animations
+            document.querySelectorAll('.reveal, .reveal-delay-1').forEach(function(el) {
+                el.classList.add('active');
+            });
+        });
+    </script>
+}

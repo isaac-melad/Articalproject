@@ -1,0 +1,24 @@
+﻿@{
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+
+<div dir="rtl" class="pagination">
+    <span>الصفحة @currentPage من @totalPages</span>
+    
+    @* Page numbers (right-to-left order) *@
+    @for (int i = Math.Min(currentPage + 4, totalPages); i >= Math.Max(currentPage - 4, 1); i--)
+    {
+        <a href="@Url.Action("Index", new { page = i })" class="@(i == currentPage ? "active" : "")">@i</a>
+    }
+
+    @* Quick jump links (e.g., 10, 20, 30) *@
+    @for (int jump = 10; jump <= totalPages; jump += 10)
+    {
+        <a href="@Url.Action("Index", new { page = jump })">@jump</a>
+    }
+
+    @* Navigation arrows *@
+    <a href="@Url.Action("Index", new { page = Math.Max(currentPage - 1, 1) })">«</a>
+    <a href="@Url.Action("Index", new { page = Math.Min(currentPage + 1, totalPages) })">»</a>
+</div>

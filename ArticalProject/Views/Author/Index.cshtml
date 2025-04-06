@@ -1,0 +1,123 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<ArticalProject.Core.Models.Author>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/author.css">
+
+<div class="category-container" style="font-family: 'Cairo', sans-serif;" dir="rtl">
+    <div class="container py-4">
+        <div class="card author-card border-0">
+            <div class="card-header bg-primary text-white py-4 rounded-top-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-people-fill fs-2"></i>
+                        <div>
+                            <h1 class="h3 mb-0">قائمة المؤلفين</h1>
+                            <span class="badge bg-white text-primary fs-6 mt-1">@Model.Count() مؤلف</span>
+                        </div>
+                    </div>
+                    <!-- Removed "New Author" button -->
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row mb-4">
+                    <div class="col-md-8 offset-md-4">
+                        <form asp-action="Index" method="get" class="input-group shadow-sm">
+                            <button class="btn btn-outline-primary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <input type="search" name="searchTerm" class="form-control form-control-lg border-start-0"
+                                placeholder="ابحث عن مؤلف...">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive rounded-3 border">
+                    <table class="table table-hover mb-0">
+                        <thead class="sticky-header">
+                            <tr class="bg-light">
+                                <th class="ps-4 fw-bold text-primary" style="width: 80px;">#</th>
+                                <th class="fw-bold">المعلومات</th>
+                                <th class="fw-bold">التواصل</th>
+                                <th class="fw-bold text-end" style="min-width: 150px;">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 fw-semibold text-muted">@obj.Id</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="@(string.IsNullOrEmpty(obj.ProfileImageUrl) ? "/img/profile.png" : $"/images/{obj.ProfileImageUrl}")"
+                                                class="rounded-circle shadow-sm" alt="صورة المؤلف"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <div class="fw-bold mb-1">@obj.FullName</div>
+                                                <div class="text-muted small">@obj.UserName</div>
+                                                <div class="text-muted small bio-text" title="@obj.Bio">@obj.Bio</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            @if (!string.IsNullOrEmpty(obj.FacebookUrl))
+                                            {
+                                                <a href="@obj.FacebookUrl" target="_blank"
+                                                    class="social-link btn btn-outline-primary rounded-circle"
+                                                    data-bs-toggle="tooltip" title="Facebook">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            }
+                                            @if (!string.IsNullOrEmpty(obj.TwitterUrl))
+                                            {
+                                                <a href="@obj.TwitterUrl" target="_blank"
+                                                    class="social-link btn btn-outline-info rounded-circle"
+                                                    data-bs-toggle="tooltip" title="Twitter">
+                                                    <i class="bi bi-twitter-x"></i>
+                                                </a>
+                                            }
+                                            @if (!string.IsNullOrEmpty(obj.InstagramUrl))
+                                            {
+                                                <a href="@obj.InstagramUrl" target="_blank"
+                                                    class="social-link btn btn-outline-danger rounded-circle"
+                                                    data-bs-toggle="tooltip" title="Instagram">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <div class="d-flex gap-2 justify-content-end">
+                                            <a asp-controller="Author" asp-action="Edit" asp-route-id="@obj.Id"
+                                               class="btn btn-sm btn-light shadow-sm" data-bs-toggle="tooltip"
+                                               title="تعديل">
+                                               <i class="bi bi-pencil"></i>
+                                           </a>
+                                           <a asp-controller="Author" asp-action="Details" asp-route-id="@obj.Id"
+                                               class="btn btn-sm btn-light shadow-sm" data-bs-toggle="tooltip"
+                                               title="تفاصيل">
+                                               <i class="bi bi-info-circle"></i>
+                                           </a>
+                                           <a asp-controller="Author" asp-action="Delete" asp-route-id="@obj.Id"
+                                                class="btn btn-sm btn-light text-danger shadow-sm" data-bs-toggle="tooltip"
+                                                title="حذف">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <partial name="_Pagination" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/author.js"></script>
+}

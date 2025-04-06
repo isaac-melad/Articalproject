@@ -1,0 +1,23 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "خطأ";
+}
+
+<h1 class="text-danger">خطأ.</h1>
+<h2 class="text-danger">حدث خطأ أثناء معالجة طلبك.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>معرف الطلب:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>وضع التطوير</h3>
+<p>
+    التبديل إلى بيئة <strong>التطوير</strong> سيعرض مزيدًا من التفاصيل حول الخطأ الذي حدث.
+</p>
+<p>
+    <strong>يجب عدم تمكين بيئة التطوير في التطبيقات المنشورة</strong> لأنها قد تعرض معلومات حساسة من الاستثناءات للمستخدمين النهائيين. لعملية تصحيح الأخطاء المحلية، يمكن تمكين بيئة التطوير عن طريق تعيين متغير البيئة <strong>ASPNETCORE_ENVIRONMENT</strong> إلى <strong>التطوير</strong> وإعادة تشغيل التطبيق.
+</p>

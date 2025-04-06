@@ -1,0 +1,281 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<ArticalProject.Core.Models.AuthorPost>
+@{
+    ViewData["Title"] = "الرئيسية";
+    int pageNumber = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+}
+
+<div class="rtl" style="font-family: 'Cairo', sans-serif; line-height: 1.8;" dir="rtl">
+    <!-- الهيدر المطور بتصميم عصري -->
+    <header class="text-center text-white masthead py-5 reveal">
+        <!-- إضافة عناصر زخرفية للخلفية -->
+        <div class="decorative-circles">
+            <div class="decorative-circle-1"></div>
+            <div class="decorative-circle-2"></div>
+            <div class="decorative-circle-3"></div>
+        </div>
+        <div class="container position-relative reveal-slide-up">
+            <div class="d-flex justify-content-center mb-4">
+                <div class="profile-circle">
+                    <img class="img-fluid" src="~/img/profile.png" alt="شعار الموقع">
+                </div>
+            </div>
+            <h1 class="display-2 fw-bold mb-3 pulse">مقالاتي</h1>
+            <div class="star-divider mb-4 reveal-delay-1">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="star-divider-line"></div>
+                    <i class="fas fa-star fa-2x mx-3"></i>
+                    <div class="star-divider-line star-divider-line-right"></div>
+                </div>
+            </div>
+            <h2 class="h2 mb-5 fw-light reveal-delay-2" style="color: rgba(255,255,255,0.95);">مرحبا بك في عالم المعرفة التقنية</h2>
+            <a asp-area="" asp-controller="Account" asp-action="Register"
+               class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow hover-lift join-button">
+                <i class="fas fa-user-plus me-2"></i>
+                انضم إلى مجتمعنا
+            </a>
+        </div>
+    </header>
+
+    <!-- قسم المقالات المحسّن - تصميم محسن -->
+    <section id="articles" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-5 fw-bold text-dark reveal" style="position: relative;">
+                آخر المقالات
+                <div class="mx-auto mt-3" style="height: 4px; width: 100px; background: linear-gradient(90deg, transparent, var(--primary-color), transparent); border-radius: 4px;"></div>
+            </h2>
+
+            <!-- شريط البحث والتصفية المطور - تصميم محسن -->
+            <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-4 mb-5 reveal-delay-1"
+                 style="padding: 16px; border: none; backdrop-filter: blur(10px);">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <form asp-controller="Home" asp-action="Index" method="get" class="ms-auto search-form">
+                            <div class="input-group search-group">
+                                <input name="searchTerm" class="form-control border-0 rounded-pill shadow-sm search-input" type="search"
+                                    placeholder="ابحث عن مقالة..."
+                                    style="padding: 14px 50px 14px 20px; transition: all 0.3s ease;"
+                                    value="@ViewBag.SearchTerm">
+                                <span class="input-group-text bg-transparent border-0 position-absolute"
+                                      style="right: 8px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                                    <button type="submit" class="bg-transparent border-0 search-button">
+                                        <i class="fas fa-search text-primary" style="font-size: 1.1rem; transition: all 0.3s ease;"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav category-filter">
+                            <!-- تبسيط التصنيفات مع قائمة منسدلة - تصميم محسن -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fw-medium filter-button" href="#" role="button" data-bs-toggle="dropdown"
+                                   style="padding: 12px 24px; border-radius: 30px; transition: all 0.3s ease; background-color: #f8f9fa; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                                    <i class="fas fa-filter me-2"></i> @(ViewBag.SelectedCategory ?? "جميع التصنيفات")
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0"
+                                    style="border-radius: 16px; padding: 12px; margin-top: 10px; min-width: 220px; box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;">
+                                    <li><a class="dropdown-item rounded-pill my-1" asp-controller="Home" asp-action="Index" asp-route-category="">جميع التصنيفات</a></li>
+                                    @foreach (var category in (ViewBag.Categories as IEnumerable<string>) ?? [])
+                                    {
+                                        <li><a class="dropdown-item rounded-pill my-1" asp-controller="Home" asp-action="Index" asp-route-category="@category">@category</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- بطاقات المقالات المطوّرة - تصميم محسن -->
+            <div class="row g-4 mb-5">
+                @if (Model.Any())
+                {
+                    foreach (var post in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 reveal-delay-1">
+                            <div class="article-card bg-white h-100 rounded-4 shadow-sm overflow-hidden hover-lift"
+                                 style="transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid var(--border-light);">
+                                <div class="position-relative">
+                                    <img src="@(post.PostImageUrl ?? "~/img/portfolio/cabin.png")" class="img-fluid w-100" alt="@(post.PostTitle ?? "Article")"
+                                        style="height: 220px; object-fit: cover; transition: all 0.5s ease;">
+                                    <div class="position-absolute top-0 end-0 m-3">
+                                        <span class="badge bg-primary rounded-pill px-3 py-2 shadow-sm"
+                                              style="backdrop-filter: blur(5px); background: linear-gradient(135deg, var(--primary-color), #2447C4) !important;">مقالة</span>
+                                    </div>
+                                    <div class="position-absolute bottom-0 start-0 end-0 p-3"
+                                         style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); height: 80px;">
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between mb-3 text-muted small">
+                                        <span class="badge bg-light text-dark rounded-pill px-3 py-2" style="font-size: 0.8rem;">
+                                            <i class="fas fa-calendar-alt me-1"></i>@(post.CreatedAt.ToString("dd MMMM", new System.Globalization.CultureInfo("ar-SA")))
+                                        </span>
+                                        <span class="badge bg-light text-dark rounded-pill px-3 py-2" style="font-size: 0.8rem;">
+                                            <i class="fas fa-user me-1"></i>@(post.Author?.FullName ?? "كاتب غير معروف")
+                                        </span>
+                                    </div>
+                                    <h3 class="h5 fw-bold mb-3" style="line-height: 1.5;">@(post.PostTitle ?? "عنوان غير متوفر")</h3>
+                                    <p class="text-secondary mb-4 content-preview" style="height: 75px; overflow: hidden; line-height: 1.7;">@(post.Content ?? "محتوى غير متوفر")</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a asp-controller="Home" asp-action="Details" asp-route-id="@post.Id"
+                                           class="btn btn-primary rounded-pill px-4 shadow-sm read-more-btn"
+                                           style="transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;">
+                                            اقرأ المزيد <i class="fas fa-arrow-left ms-2"></i>
+                                        </a>
+                                        <div>
+                                            <span class="badge bg-light text-primary rounded-pill px-3 py-2" style="font-size: 0.8rem;">
+                                                <i class="fas fa-bookmark me-1"></i>مقالة
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm reveal-delay-1 empty-state-wrapper">
+                        <div class="empty-state-container p-4">
+                            <div class="empty-state-icon mb-4">
+                                <i class="fas fa-newspaper fa-4x text-muted" style="opacity: 0.7;"></i>
+                            </div>
+                            <h3 class="mb-3">لم يتم العثور على مقالات</h3>
+                            <p class="text-muted mb-4">حاول تغيير معايير البحث أو تصفح جميع التصنيفات</p>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-4 py-2">
+                                <i class="fas fa-sync-alt me-2"></i> عرض جميع المقالات
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- الترقيم المطور - تصميم محسن -->
+            @if (totalPages > 1)
+            {
+                <nav aria-label="Page navigation" class="reveal-delay-1">
+                    <ul class="pagination pagination-modern justify-content-center">
+                        <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link rounded-circle mx-1 shadow-sm pagination-link"
+                               style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: none; font-size: 1.1rem;"
+                               asp-controller="Home" asp-action="Index" asp-route-page="@(pageNumber - 1)"
+                               asp-route-category="@ViewBag.SelectedCategory" asp-route-searchTerm="@ViewBag.SearchTerm" aria-label="السابق">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        @{
+                            // Show limited page numbers with ellipsis for better UX
+                            const int maxPagesToShow = 5;
+                            int startPage = Math.Max(1, pageNumber - maxPagesToShow / 2);
+                            int endPage = Math.Min(totalPages, startPage + maxPagesToShow - 1);
+
+                            if (startPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle mx-1 shadow-sm pagination-link"
+                                       style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: none;"
+                                       asp-controller="Home" asp-action="Index" asp-route-page="1"
+                                       asp-route-category="@ViewBag.SelectedCategory" asp-route-searchTerm="@ViewBag.SearchTerm">1</a>
+                                </li>
+                                if (startPage > 2)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link border-0 bg-transparent">...</span>
+                                    </li>
+                                }
+                            }
+
+                            for (int i = startPage; i <= endPage; i++)
+                            {
+                                var pageNum = i; // Create local variable to avoid capture issues
+                                <li class="page-item @(pageNum == pageNumber ? "active" : "")">
+                                    <a class="page-link rounded-circle mx-1 shadow-sm pagination-link"
+                                       style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: none; font-weight: @(pageNum == pageNumber ? "bold" : "normal");"
+                                       asp-controller="Home" asp-action="Index" asp-route-page="@pageNum"
+                                       asp-route-category="@ViewBag.SelectedCategory" asp-route-searchTerm="@ViewBag.SearchTerm">@pageNum</a>
+                                </li>
+                            }
+
+                            if (endPage < totalPages)
+                            {
+                                if (endPage < totalPages - 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link border-0 bg-transparent">...</span>
+                                    </li>
+                                }
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle mx-1 shadow-sm"
+                                       style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: none; background: linear-gradient(to bottom, #ffffff, #f8f9fa);"
+                                       asp-controller="Home" asp-action="Index" asp-route-page="@totalPages"
+                                       asp-route-category="@ViewBag.SelectedCategory" asp-route-searchTerm="@ViewBag.SearchTerm">@totalPages</a>
+                                </li>
+                            }
+                        }
+                        <li class="page-item @(pageNumber == totalPages ? "disabled" : "")">
+                            <a class="page-link rounded-circle mx-1 shadow-sm"
+                               style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: none; font-size: 1.1rem; background: linear-gradient(to bottom, #ffffff, #f8f9fa);"
+                               asp-controller="Home" asp-action="Index" asp-route-page="@(pageNumber + 1)"
+                               asp-route-category="@ViewBag.SelectedCategory" asp-route-searchTerm="@ViewBag.SearchTerm" aria-label="التالي">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    <script>
+        // Enhanced animations with scroll reveal effect
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial animations for above-the-fold content
+            document.querySelectorAll('.reveal, .reveal-slide-up').forEach(function(el) {
+                el.classList.add('active');
+            });
+
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal:not(.active), .reveal-delay-1:not(.active), .reveal-delay-2:not(.active)');
+
+            const revealOnScroll = function() {
+                for (let i = 0; i < revealElements.length; i++) {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = revealElements[i].getBoundingClientRect().top;
+                    const elementVisible = 150; // Adjust this value to change when elements become visible
+
+                    if (elementTop < windowHeight - elementVisible) {
+                        revealElements[i].classList.add('active');
+                    }
+                }
+            };
+
+            // Initial check on page load
+            revealOnScroll();
+
+            // Check on scroll
+            window.addEventListener('scroll', revealOnScroll);
+
+            // Add hover effects to article cards
+            const articleCards = document.querySelectorAll('.article-card');
+            articleCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+}
+

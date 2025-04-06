@@ -1,0 +1,135 @@
+@model ArticalProject.Core.Models.AuthorPost
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "لوحة التحكم";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/admin-dashboard.css">
+}
+
+<div class="container my-5 dashboard-container">
+    <section class="mb-5 fade-in-up">
+        <div class="welcome-card">
+            <div class="welcome-background" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('@Url.Content("~/img/product-aeon-feature.jpg")');"></div>
+            <div class="welcome-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h1 class="welcome-title">مرحبا بك <span style="color: #FFD166;">@Model.UserName</span></h1>
+                <p class="welcome-text">يسعدنا انضمامك إلينا, يمكنك باستخدام لوحة التحكم إدارة المحتوى الخاص بك على الموقع.</p>
+                <div class="mt-3">
+                    <span class="badge bg-light text-dark p-2">
+                        <i class="fas fa-calendar-alt me-2"></i> @DateTime.Now.ToString("dddd, dd MMMM yyyy")
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="stat-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value counter">@ViewBag.PostCount</div>
+                        <p class="stat-label">مشاركاتك الكُلْيَة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stat-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value counter">@ViewBag.PostCountThisYear</div>
+                        <p class="stat-label">مشاركاتك لهذه السنة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stat-card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value counter">@ViewBag.PostCountThisMonth</div>
+                        <p class="stat-label">مشاركاتك لهذا الشهر</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="quick-actions fade-in-up" style="animation-delay: 0.4s;">
+        <h2 class="section-title">إجراءات سريعة</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <a asp-controller="AuthorPost" asp-action="Create" class="action-button-card">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>إضافة مقالة</span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <a asp-controller="AuthorPost" asp-action="Index" class="action-button-card">
+                    <i class="fas fa-newspaper"></i>
+                    <span>إدارة المقالات</span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <a asp-controller="Author" asp-action="Edit" asp-route-id="@ViewBag.AuthorId" class="action-button-card">
+                    <i class="fas fa-user-edit"></i>
+                    <span>تعديل الملف</span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <a asp-controller="Home" asp-action="Index" class="action-button-card">
+                    <i class="fas fa-home"></i>
+                    <span>الصفحة الرئيسية</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+        <script>
+            // Add counter animation to stat values
+            document.addEventListener('DOMContentLoaded', function() {
+                const counters = document.querySelectorAll('.counter');
+            
+                counters.forEach(counter => {
+                    const target = parseInt(counter.innerText);
+                    const duration = 1500;
+                    const step = Math.ceil(target / (duration / 30));
+                    let current = 0;
+                
+                    counter.innerText = '0';
+                
+                    const updateCounter = () => {
+                        current += step;
+                        if (current >= target) {
+                            counter.innerText = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = current;
+                        }
+                    };
+                
+                    const timer = setInterval(updateCounter, 30);
+                });
+            
+                // Add animation classes
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in-up').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    });
+                }, 100);
+            });
+        </script>
+}

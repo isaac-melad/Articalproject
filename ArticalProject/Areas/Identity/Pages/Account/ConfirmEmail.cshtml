@@ -1,0 +1,10 @@
+﻿@page
+@using ArticalProject.Areas.Identity.Pages.Account
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "تأكيد البريد الإلكتروني";
+}
+
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />

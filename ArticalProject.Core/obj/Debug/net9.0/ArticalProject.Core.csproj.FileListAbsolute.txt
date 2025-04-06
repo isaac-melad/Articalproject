@@ -1,0 +1,12 @@
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\bin\Debug\net9.0\ArticalProject.Core.deps.json
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\bin\Debug\net9.0\ArticalProject.Core.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\bin\Debug\net9.0\ArticalProject.Core.pdb
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.csproj.AssemblyReference.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.AssemblyInfoInputs.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.AssemblyInfo.cs
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.csproj.CoreCompileInputs.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\refint\ArticalProject.Core.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ArticalProject.Core.pdb
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Core\obj\Debug\net9.0\ref\ArticalProject.Core.dll

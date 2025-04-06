@@ -1,0 +1,78 @@
+@model ArticalProject.Core.Models.AuthorPost
+
+@{
+    ViewData["Title"] = "حذف المنشور";
+}
+
+<link rel="stylesheet" href="~/css/authorpost.css" />
+
+<div class="category-container" style="font-family: 'Cairo', sans-serif;" dir="rtl">
+    <div class="container py-4">
+        <div class="card post-card border-0">
+            <div class="card-header bg-danger text-white py-4 rounded-top-3">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-trash fs-2"></i>
+                    <h1 class="h3 mb-0">تأكيد حذف المنشور</h1>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="alert alert-warning mb-4">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    هل أنت متأكد من رغبتك في حذف هذا المنشور؟ هذا الإجراء لا يمكن التراجع عنه.
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <h2 class="h4 fw-bold mb-3">@Model.PostTitle</h2>
+                        
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="bi bi-person me-2"></i>
+                            <span class="me-3">@Model.FullName</span>
+                            <i class="bi bi-calendar3 me-2"></i>
+                            <span>@Model.CreatedAt.ToString("yyyy-MM-dd")</span>
+                        </div>
+                        
+                        <div class="post-content mb-3">
+                            @Html.Raw(Model.Content)
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        @if (!string.IsNullOrEmpty(Model.PostImageUrl))
+                        {
+                            <div class="mb-3">
+                                <img src="@Model.PostImageUrl" alt="صورة المنشور" class="img-fluid rounded" />
+                            </div>
+                        }
+                        
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <i class="bi bi-tag me-2"></i> التصنيف
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-primary">@(Model.Category?.Name ?? "غير محدد")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="AuthorId" />
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="UserName" />
+                    <input type="hidden" asp-for="FullName" />
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> العودة للقائمة
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> تأكيد الحذف
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

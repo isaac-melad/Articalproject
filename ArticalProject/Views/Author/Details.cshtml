@@ -1,0 +1,109 @@
+@model ArticalProject.Core.Models.Author
+
+@{
+    ViewData["Title"] = "تفاصيل المؤلف";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/author.css">
+
+<div class="category-container" style="font-family: 'Cairo', sans-serif;" dir="rtl">
+    <div class="container py-4">
+        <div class="card author-card border-0">
+            <div class="card-header bg-primary text-white py-4 rounded-top-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-person-badge fs-2"></i>
+                        <div>
+                            <h1 class="h3 mb-0">تفاصيل المؤلف</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4 mb-md-0">
+                        @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+                        {
+                            <img src="~/images/@Model.ProfileImageUrl"
+                                 class="rounded-circle shadow-lg"
+                                 alt="صورة الملف الشخصي"
+                                 style="width: 200px; height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="~/img/profile.png"
+                                 class="rounded-circle shadow-lg"
+                                 alt="صورة افتراضية"
+                                 style="width: 200px; height: 200px; object-fit: cover;">
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <div class="author-details">
+                            <div class="mb-4">
+                                <h2 class="fw-bold text-primary">@Model.FullName</h2>
+                                <div class="text-muted">@Model.UserName</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h5 class="fw-bold border-bottom pb-2 mb-3">السيرة الذاتية</h5>
+                                <p class="lead">@Model.Bio</p>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.FacebookUrl) ||
+                                 !string.IsNullOrEmpty(Model.TwitterUrl) ||
+                                 !string.IsNullOrEmpty(Model.InstagramUrl))
+                            {
+                                <div class="mb-4">
+                                    <h5 class="fw-bold border-bottom pb-2 mb-3">وسائل التواصل</h5>
+                                    <div class="d-flex gap-2">
+                                        @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                                        {
+                                            <a href="@Model.FacebookUrl" target="_blank"
+                                               class="social-link btn btn-outline-primary rounded-circle"
+                                               data-bs-toggle="tooltip" title="Facebook">
+                                                <i class="bi bi-facebook"></i>
+                                            </a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.TwitterUrl))
+                                        {
+                                            <a href="@Model.TwitterUrl" target="_blank"
+                                               class="social-link btn btn-outline-info rounded-circle"
+                                               data-bs-toggle="tooltip" title="Twitter">
+                                                <i class="bi bi-twitter-x"></i>
+                                            </a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.InstagramUrl))
+                                        {
+                                            <a href="@Model.InstagramUrl" target="_blank"
+                                               class="social-link btn btn-outline-danger rounded-circle"
+                                               data-bs-toggle="tooltip" title="Instagram">
+                                                <i class="bi bi-instagram"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 justify-content-end mt-4">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4">
+                        <i class="bi bi-pencil me-2"></i>تعديل
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-arrow-right me-2"></i>العودة
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add any additional JS if needed
+    </script>
+}

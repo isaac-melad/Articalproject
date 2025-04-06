@@ -1,0 +1,83 @@
+﻿@page
+@using ArticalProject.Areas.Identity.Pages.Account
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "تأكيد التسجيل";
+}
+
+<div class="container mt-5 animate fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-3 hover-card">
+                <div class="card-header bg-gradient text-white text-center py-4">
+                    <h2 class="mb-0 fw-bold">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body p-4">
+                    @if (Model.DisplayConfirmAccountLink)
+                    {
+                        <div class="alert alert-info shadow-sm border-0 rounded-3" role="alert">
+                            <p class="lead mb-3">
+                                هذا التطبيق لا يحتوي حالياً على مرسل بريد إلكتروني حقيقي مسجل، راجع 
+                                <a href="https://aka.ms/aspaccountconf" target="_blank" class="text-decoration-none fw-bold">هذه الوثائق</a> 
+                                لمعرفة كيفية تكوين مرسل بريد إلكتروني حقيقي.
+                            </p>
+                            <hr class="my-3">
+                            <p class="mb-3">عادةً سيتم إرسال هذا عبر البريد الإلكتروني:</p>
+                            <div class="text-center">
+                                <a id="confirm-link" href="@Model.EmailConfirmationUrl" 
+                                   class="btn btn-primary btn-lg px-4 shadow-sm">
+                                    <i class="fas fa-check-circle me-2"></i>انقر هنا لتأكيد حسابك
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success shadow-sm border-0 rounded-3" role="alert">
+                            <p class="lead mb-0 text-center">
+                                <i class="fas fa-envelope me-2"></i>من فضلك تحقق من بريدك الإلكتروني لتأكيد حسابك.
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient {
+    background: linear-gradient(45deg, var(--bs-primary), #2b5797);
+}
+
+.hover-card {
+    transition: transform 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+}
+
+.animate {
+    animation-duration: 0.8s;
+    animation-fill-mode: both;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+@@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+}
+</style>

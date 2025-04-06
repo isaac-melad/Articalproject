@@ -1,0 +1,81 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\isaac\\Documents\\ArticalProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2D5F121A-7E62-4DB3-A3A4-E3EC0F9D5AA8}|ArticalProject\\ArticalProject.csproj|c:\\users\\isaac\\documents\\articalproject\\articalproject\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D5F121A-7E62-4DB3-A3A4-E3EC0F9D5AA8}|ArticalProject\\ArticalProject.csproj|solutionrelative:articalproject\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D5F121A-7E62-4DB3-A3A4-E3EC0F9D5AA8}|ArticalProject\\ArticalProject.csproj|c:\\users\\isaac\\documents\\articalproject\\articalproject\\views\\author\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D5F121A-7E62-4DB3-A3A4-E3EC0F9D5AA8}|ArticalProject\\ArticalProject.csproj|solutionrelative:articalproject\\views\\author\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08CFBEEA-EC23-447D-9737-7F0A362E40FD}|ArticalProject.Core\\ArticalProject.Core.csproj|c:\\users\\isaac\\documents\\articalproject\\articalproject.core\\models\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08CFBEEA-EC23-447D-9737-7F0A362E40FD}|ArticalProject.Core\\ArticalProject.Core.csproj|solutionrelative:articalproject.core\\models\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Author.cs",
+              "DocumentMoniker": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject.Core\\Models\\Author.cs",
+              "RelativeDocumentMoniker": "ArticalProject.Core\\Models\\Author.cs",
+              "ToolTip": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject.Core\\Models\\Author.cs",
+              "RelativeToolTip": "ArticalProject.Core\\Models\\Author.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T17:10:17.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject\\Views\\Author\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ArticalProject\\Views\\Author\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject\\Views\\Author\\Edit.cshtml",
+              "RelativeToolTip": "ArticalProject\\Views\\Author\\Edit.cshtml",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-30T17:04:31.863Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthorController.cs",
+              "DocumentMoniker": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject\\Controllers\\AuthorController.cs",
+              "RelativeDocumentMoniker": "ArticalProject\\Controllers\\AuthorController.cs",
+              "ToolTip": "C:\\Users\\isaac\\Documents\\ArticalProject\\ArticalProject\\Controllers\\AuthorController.cs",
+              "RelativeToolTip": "ArticalProject\\Controllers\\AuthorController.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAGEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T16:56:48.438Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

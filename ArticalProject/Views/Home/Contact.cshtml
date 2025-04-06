@@ -1,0 +1,529 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "Contact Us"; // Changed title
+    Layout = "_Layout";
+}
+
+@* Add custom styles for the contact form *@
+@section Styles {
+    <style>
+        /* Enhanced Contact Section Styling */
+        #contact {
+            background-color: var(--bg-light-secondary);
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add subtle background pattern */
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 20%),
+                linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.01) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(var(--primary-color-rgb), 0.01) 0%, rgba(var(--primary-color-rgb), 0.01) 1px, transparent 1px, transparent 10px);
+            pointer-events: none;
+        }
+
+        /* Enhanced Card Styling */
+        .contact-card {
+            border: none;
+            border-radius: var(--card-border-radius);
+            box-shadow: var(--shadow-light);
+            transition: all 0.4s var(--transition-timing);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            background-color: var(--bg-light);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 2;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-body {
+            padding: 3.5rem;
+        }
+
+        /* Enhanced Form Controls */
+        .form-floating>.form-control {
+            height: calc(3.5rem + 2px);
+            line-height: 1.25;
+            border-radius: 0.75rem;
+            border-color: var(--border-light);
+            transition: all 0.3s var(--transition-timing);
+            background-color: var(--bg-light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(5px);
+        }
+
+        .form-floating>label {
+            padding: 1rem 0.75rem;
+            opacity: 0.7;
+            transform-origin: 0 0;
+            transition: all 0.3s var(--transition-timing);
+            color: var(--dark-color);
+        }
+
+        .form-floating>.form-control:focus~label,
+        .form-floating>.form-control:not(:placeholder-shown)~label {
+            opacity: 0.9;
+            transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            color: var(--primary-color);
+        }
+
+        .form-floating>.form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.15), 0 5px 15px rgba(var(--primary-color-rgb), 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Textarea */
+        #contactForm textarea.form-control {
+            min-height: 150px;
+            resize: none;
+        }
+
+        /* Enhanced Button */
+        .contact-btn {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 50px;
+            padding: 0.9rem 2.5rem;
+            font-weight: 600;
+            transition: all 0.3s var(--transition-timing);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.2);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.3);
+        }
+
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.8s;
+        }
+
+        .contact-btn:active::after {
+            transform: scale(0, 0);
+            opacity: 0.3;
+            transition: 0s;
+        }
+
+        /* Enhanced Section Title */
+        .section-title {
+            color: var(--dark-color);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+
+        /* Enhanced Divider */
+        .divider {
+            /* We'll keep it visible but make it smaller */
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            width: 3rem;
+            margin: 0.5rem auto 3rem auto;
+            border-radius: 3px;
+            opacity: 0.7;
+        }
+
+        /* Enhanced Icon Styling */
+        .form-floating label i {
+            margin-right: 10px;
+            color: var(--text-muted);
+            width: 1em;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating>.form-control:focus~label i,
+        .form-floating>.form-control:not(:placeholder-shown)~label i {
+            color: var(--primary-color);
+        }
+
+        /* Form Group Animation */
+        .form-group {
+            transition: all 0.3s ease;
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+
+        /* Dark Mode Enhancements */
+        .dark-mode #contact {
+            background-color: var(--dark-surface-lighter);
+        }
+
+        .dark-mode #contact::before {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 20%),
+                linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(var(--primary-color-rgb), 0.02) 0%, rgba(var(--primary-color-rgb), 0.02) 1px, transparent 1px, transparent 10px);
+            opacity: 0.7;
+        }
+
+        .dark-mode .contact-card {
+            background-color: rgba(30, 30, 30, 0.8);
+            box-shadow: var(--dark-shadow);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--dark-border);
+        }
+
+        .dark-mode .contact-card:hover {
+            box-shadow: var(--dark-shadow-elevated);
+            border-color: var(--dark-border-strong);
+        }
+
+        .dark-mode .section-title {
+            color: var(--dark-text);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .section-title::after {
+            background: linear-gradient(90deg, var(--dark-primary), var(--dark-accent));
+            box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
+        }
+
+        .dark-mode .form-floating>.form-control {
+            background-color: var(--dark-surface-lighter);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        .dark-mode .form-floating>label {
+            color: var(--dark-text-muted);
+        }
+
+        .dark-mode .form-floating>.form-control:focus~label,
+        .dark-mode .form-floating>.form-control:not(:placeholder-shown)~label {
+            color: var(--dark-primary);
+        }
+
+        .dark-mode .form-floating>.form-control:focus {
+            border-color: var(--dark-primary);
+            box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            background-color: rgba(45, 45, 45, 0.9);
+        }
+
+        .dark-mode .contact-btn {
+            background-color: var(--dark-primary);
+            border-color: var(--dark-primary);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-color-rgb), 0.2);
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .contact-btn:hover {
+            background-color: var(--dark-primary-hover);
+            border-color: var(--dark-primary-hover);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-color-rgb), 0.3);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .dark-mode .contact-btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-color-rgb), 0.4);
+        }
+
+        /* Form Validation Styling */
+        .form-control.is-valid {
+            border-color: var(--success-color) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2306d6a0' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--accent-color) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ef476f'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ef476f' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+
+        .dark-mode .form-control.is-valid {
+            border-color: var(--dark-secondary) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2303dac6' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        }
+
+        .dark-mode .form-control.is-invalid {
+            border-color: var(--dark-accent) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff6b95'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff6b95' stroke='none'/%3e%3c/svg%3e");
+        }
+
+        /* Responsive Adjustments */
+        @@media (max-width: 768px) {
+            .card-body {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+}
+
+<div>
+    <!-- قسم التواصل - Enhanced Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="text-center text-uppercase section-title">تواصل معنا</h2>
+            <hr class="divider">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card contact-card">
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-4 form-group">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="الاسم" required>
+                                        <label for="name">
+                                            <i class="fa fa-user"></i>الاسم
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 form-group">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="البريد الإلكتروني" required>
+                                        <label for="email">
+                                            <i class="fa fa-envelope"></i>البريد الإلكتروني
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 form-group">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                            placeholder="رقم الهاتف" required>
+                                        <label for="phone">
+                                            <i class="fa fa-phone"></i>رقم الهاتف
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 form-group">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="message" name="message" placeholder="رسالتك"
+                                            required></textarea>
+                                        <label for="message">
+                                            <i class="fa fa-comment"></i>رسالتك
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-5 form-group">
+                                    <button class="btn btn-lg contact-btn" type="submit">
+                                        <i class="fa fa-paper-plane me-2"></i>إرسال الرسالة
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    <script>
+        // Immediate script to ensure form fields are visible
+        (function () {
+            // Force all form elements to be visible
+            var formGroups = document.querySelectorAll('#contact .form-group');
+            for (var i = 0; i < formGroups.length; i++) {
+                formGroups[i].style.opacity = '1';
+                formGroups[i].style.transform = 'translateY(0)';
+                formGroups[i].style.visibility = 'visible';
+                formGroups[i].style.display = 'block';
+            }
+        })();
+        // Enhanced Contact Form Interactions
+        document.addEventListener('DOMContentLoaded', function () {
+            // Make sure all form elements are visible
+            document.querySelectorAll('#contact .form-group').forEach(function (el) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+
+            // Form validation and enhanced feedback
+            const contactForm = document.getElementById('contactForm');
+            const formInputs = contactForm.querySelectorAll('.form-control');
+
+            // Add focus and blur effects to form controls
+            formInputs.forEach(input => {
+                // Set initial state for filled inputs
+                if (input.value.trim() !== '') {
+                    input.parentElement.classList.add('filled');
+                }
+
+                // Add focus effect
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('focused');
+                });
+
+                // Handle blur effect and validation
+                input.addEventListener('blur', () => {
+                    input.parentElement.classList.remove('focused');
+
+                    if (input.value.trim() !== '') {
+                        input.parentElement.classList.add('filled');
+
+                        // Simple validation feedback
+                        if (input.checkValidity()) {
+                            input.classList.remove('is-invalid');
+                            input.classList.add('is-valid');
+                        } else {
+                            input.classList.remove('is-valid');
+                            input.classList.add('is-invalid');
+                        }
+                    } else {
+                        input.parentElement.classList.remove('filled');
+                        input.classList.remove('is-valid');
+                        input.classList.remove('is-invalid');
+                    }
+                });
+            });
+
+            // Form submission with animation
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate all fields
+                let isValid = true;
+                formInputs.forEach(input => {
+                    if (!input.checkValidity()) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                    }
+                });
+
+                if (isValid) {
+                    // Add success animation to button
+                    const submitBtn = contactForm.querySelector('.contact-btn');
+                    submitBtn.classList.add('pulse');
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>جاري الإرسال';
+                    submitBtn.disabled = true;
+
+                    // Add a subtle animation to the form card
+                    const card = document.querySelector('.contact-card');
+                    card.classList.add('pulse');
+
+                    // You would typically send the form data to the server here
+                    // For demo purposes, we'll just simulate a successful submission
+                    setTimeout(() => {
+                        // Show success state
+                        submitBtn.classList.remove('pulse');
+                        submitBtn.classList.add('btn-success');
+                        submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>تم الإرسال بنجاح';
+
+                        // Add success animation to form
+                        formInputs.forEach(input => {
+                            input.classList.add('is-valid');
+                            input.setAttribute('readonly', 'readonly');
+                        });
+
+                        // Reset form after successful submission
+                        setTimeout(() => {
+                            // Keep form fields visible but show success state
+                            document.querySelectorAll('.form-group').forEach((group) => {
+                                group.style.opacity = '1';
+                                group.style.transform = 'translateY(0)';
+                            });
+
+                            setTimeout(() => {
+                                // Reset form
+                                contactForm.reset();
+                                formInputs.forEach(input => {
+                                    input.classList.remove('is-valid');
+                                    input.removeAttribute('readonly');
+                                    input.parentElement.classList.remove('filled');
+                                });
+
+                                // Ensure form fields are visible
+                                document.querySelectorAll('.form-group').forEach((group) => {
+                                    group.style.transition = 'all 0.3s ease';
+                                    group.style.opacity = '1';
+                                    group.style.transform = 'translateY(0)';
+                                    group.style.visibility = 'visible';
+                                    group.style.display = 'block';
+                                });
+
+                                // Reset button
+                                submitBtn.classList.remove('btn-success');
+                                submitBtn.innerHTML = '<i class="fa fa-paper-plane me-2"></i>إرسال الرسالة';
+                                submitBtn.disabled = false;
+
+                                // Remove card animation
+                                card.classList.remove('pulse');
+                            }, 800);
+                        }, 1500);
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+}

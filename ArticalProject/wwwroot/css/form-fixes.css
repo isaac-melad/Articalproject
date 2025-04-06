@@ -1,0 +1,49 @@
+/* Form Visibility Fixes */
+
+/* Ensure all form groups are visible */
+.form-group {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: translateY(0) !important;
+}
+
+/* Ensure all form controls are visible */
+.form-control {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Ensure form labels are visible */
+.form-floating > label {
+    opacity: 0.7 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Ensure contact card is visible */
+.contact-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Ensure contact section is visible */
+#contact {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Override any animation classes that might hide elements */
+.reveal, 
+.reveal-slide-up, 
+.reveal-delay-0,
+.reveal-delay-1,
+.reveal-delay-2 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: translateY(0) !important;
+}

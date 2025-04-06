@@ -1,0 +1,72 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "المصادقة الثنائية (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+@{
+    var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+    @if (consentFeature?.CanTrack ?? true)
+    {
+        @if (Model.Is2faEnabled)
+        {
+            if (Model.RecoveryCodesLeft == 0)
+            {
+                <div class="alert alert-danger">
+                    <strong>ليس لديك رموز استرداد.</strong>
+                    <p>يجب عليك <a asp-page="./GenerateRecoveryCodes">إنشاء مجموعة جديدة من رموز الاسترداد</a> قبل أن تتمكن من تسجيل الدخول باستخدام رمز استرداد.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft == 1)
+            {
+                <div class="alert alert-danger">
+                    <strong>ليس لديك سوى رمز استرداد واحد.</strong>
+                    <p>يمكنك <a asp-page="./GenerateRecoveryCodes">إنشاء مجموعة جديدة من رموز الاسترداد</a>.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft <= 3)
+            {
+                <div class="alert alert-warning">
+                    <strong>ليس لديك سوى @Model.RecoveryCodesLeft رمز استرداد.</strong>
+                    <p>يجب عليك <a asp-page="./GenerateRecoveryCodes">إنشاء مجموعة جديدة من رموز الاسترداد</a>.</p>
+                </div>
+            }
+
+            if (Model.IsMachineRemembered)
+            {
+                <form method="post" style="display: inline-block">
+                    <button type="submit" class="btn btn-primary">نسيت هذا المتصفح</button>
+                </form>
+            }
+            <a asp-page="./Disable2fa" class="btn btn-primary">تعطيل 2FA</a>
+            <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">إعادة تعيين رموز الاسترداد</a>
+        }
+
+        <h4>تطبيق المصادقة</h4>
+        @if (!Model.HasAuthenticator)
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">إضافة تطبيق المصادقة</a>
+        }
+        else
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">تكوين تطبيق المصادقة</a>
+            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">إعادة تعيين تطبيق المصادقة</a>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>لم يتم قبول سياسة الخصوصية وملفات تعريف الارتباط.</strong>
+            <p>يجب عليك قبول السياسة قبل أن تتمكن من تمكين المصادقة الثنائية.</p>
+        </div>
+    }
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

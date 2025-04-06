@@ -1,0 +1,22 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model LogoutModel
+@{
+    ViewData["Title"] = "تسجيل الخروج";
+}
+
+<header>
+    <h1>@ViewData["Title"]</h1>
+    @{
+        if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">انقر هنا لتسجيل الخروج</button>
+            </form>
+        }
+        else
+        {
+            <p>لقد قمت بتسجيل الخروج من التطبيق بنجاح.</p>
+        }
+    }
+</header>

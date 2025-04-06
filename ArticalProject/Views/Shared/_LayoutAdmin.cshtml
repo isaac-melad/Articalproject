@@ -1,0 +1,212 @@
+@inject ArticalProject.Data.Repo.IRepo<ArticalProject.Core.Models.Author> Repo;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var userId = User.FindFirstValue(claimType: ClaimTypes.NameIdentifier);
+    int id = Repo.GetAll().Where(x => x.UserId == userId).Select(x => x.Id).First();
+    var isAuthorized = AuthorizationService.AuthorizeAsync(User, "Admin").Result;
+}
+<!DOCTYPE html>
+<html style="font-family: Cairo, sans-serif;" lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>مقالتي - لوحة التحكم</title>
+    <meta name="description" content="موقع يسمح لك بنشر مقالات ومشاركتها مع الاخرين">
+    <link rel="icon" type="image/png" href="~/images/favicon.png">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/fonts/ionicons.min.css">
+
+    <!-- Animation CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom Admin CSS -->
+    <link rel="stylesheet" href="~/css/admin-custom.css">
+
+    @await RenderSectionAsync("Styles", required: false)
+
+    <!-- Additional Custom Styles -->
+    <style>
+        .social-icon {
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 5px;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar-brand i {
+            animation: pulse 2s infinite;
+        }
+
+        @@keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeIn" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-pen-fancy me-2"></i>مقالتي
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto"></ul>
+                <span class="navbar-text actions d-flex flex-wrap justify-content-center">
+                    <a asp-controller="Author" asp-action="Edit" asp-route-id="@id"
+                        class="btn action-button animate__animated animate__fadeIn" style="animation-delay: 0.1s;"
+                        data-aos="fade-down" data-aos-delay="100">
+                        <i class="fas fa-user me-1"></i> حسابي
+                    </a>
+                    @if (isAuthorized.Succeeded)
+                    {
+                        <a class="btn action-button animate__animated animate__fadeIn" style="animation-delay: 0.2s;"
+                            role="button" asp-controller="Author" asp-action="Index" data-aos="fade-down"
+                            data-aos-delay="200">
+                            <i class="fas fa-users me-1"></i> المستخدمين
+                        </a>
+                    }
+                    <a class="btn action-button animate__animated animate__fadeIn" style="animation-delay: 0.3s;"
+                        role="button" asp-controller="AuthorPost" asp-action="Index" data-aos="fade-down"
+                        data-aos-delay="300">
+                        <i class="fas fa-newspaper me-1"></i> المقالات
+                    </a>
+                    @if (isAuthorized.Succeeded)
+                    {
+                        <a class="btn action-button animate__animated animate__fadeIn" style="animation-delay: 0.4s;"
+                            role="button" asp-controller="Category" asp-action="Index" data-aos="fade-down"
+                            data-aos-delay="400">
+                            <i class="fas fa-tags me-1"></i> الأصناف
+                        </a>
+                    }
+                    <a class="btn action-button animate__animated animate__fadeIn" style="animation-delay: 0.5s;"
+                        role="button" asp-controller="Home" asp-action="Index" data-aos="fade-down"
+                        data-aos-delay="500">
+                        <i class="fas fa-home me-1"></i> الرئيسة
+                    </a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="admin-content fade-in">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="mb-4" data-aos="fade-right" data-aos-duration="600">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i
+                                        class="fas fa-home"></i> الرئيسة</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">لوحة التحكم</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="content-wrapper" data-aos="fade-up" data-aos-duration="800">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <footer class="admin-footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="d-flex justify-content-center mb-3" data-aos="fade-up" data-aos-delay="100">
+                        <a href="#" class="text-light mx-2 social-icon"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light mx-2 social-icon"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light mx-2 social-icon"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                    <p class="mb-0" data-aos="fade-up" data-aos-delay="200">جميع الحقوق محفوظة &copy; @DateTime.Now.Year
+                        - مقالتي</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="~/js/bs-init.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            mirror: false,
+            offset: 50
+        });
+
+        // Add active class to current navigation item
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentLocation = window.location.href;
+            const navLinks = document.querySelectorAll('.action-button');
+
+            navLinks.forEach(link => {
+                if (link.href === currentLocation) {
+                    link.classList.add('active');
+                    link.style.boxShadow = '0 0 15px rgba(239, 71, 111, 0.5)';
+                }
+            });
+
+            // Add hover effects to social icons
+            const socialIcons = document.querySelectorAll('.social-icon');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'all 0.3s ease';
+                    this.style.color = '#ff9e1b';
+                });
+
+                icon.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                    this.style.color = '#ffffff';
+                });
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

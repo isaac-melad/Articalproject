@@ -1,0 +1,256 @@
+/* Admin Dashboard Styles */
+:root {
+    --card-border-radius: 16px;
+    --transition-speed: 0.3s;
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    padding: 1.5rem 0;
+}
+
+/* Welcome Card */
+.welcome-card {
+    position: relative;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-speed);
+}
+
+.welcome-card:hover {
+    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-5px);
+}
+
+.welcome-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* Stats Container */
+.stats-container {
+    margin-bottom: 2.5rem;
+}
+
+/* Stat Cards */
+.stat-card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--card-border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-speed);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-card:hover {
+    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-5px);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--primary-color);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    opacity: 0.8;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Quick Actions */
+.quick-actions {
+    background-color: white;
+    border-radius: var(--card-border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.action-button-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--light-bg);
+    border-radius: var(--card-border-radius);
+    transition: all var(--transition-speed);
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    height: 100%;
+    min-height: 150px;
+}
+
+.action-button-card:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+.action-button-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    transition: all var(--transition-speed);
+}
+
+.action-button-card span {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .welcome-title {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome-content {
+        padding: 2rem 1rem;
+    }
+    
+    .welcome-title {
+        font-size: 1.75rem;
+    }
+    
+    .welcome-text {
+        font-size: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1.25rem;
+    }
+    
+    .stat-icon {
+        font-size: 1.75rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.75rem;
+    }
+    
+    .action-button-card {
+        padding: 1.25rem;
+        min-height: 130px;
+    }
+    
+    .action-button-card i {
+        font-size: 2rem;
+    }
+}
+
+/* Animation Effects */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}

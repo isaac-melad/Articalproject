@@ -1,0 +1,53 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model EnableAuthenticatorModel
+@{
+    ViewData["Title"] = "تكوين تطبيق المصادقة";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+<div>
+    <p>لمستخدم تطبيق المصادقة، اتبع الخطوات التالية:</p>
+    <ol class="list">
+        <li>
+            <p>
+                حمل تطبيق مصادقة ثنائي مثل Microsoft Authenticator ل
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> و
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> أو
+                Google Authenticator ل
+                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> و
+                <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+            </p>
+        </li>
+        <li>
+            <p>امسح رمز الاستجابة السريع (QR Code) أو أدخل المفتاح التالي <kbd>@Model.SharedKey</kbd> في تطبيق المصادقة الثنائية. لا يهم الفراغات أو الكتابة الكبيرة أو الصغيرة.</p>
+            <div class="alert alert-info">تعرف على كيفية <a href="https://go.microsoft.com/fwlink/?Linkid=852423">تمكين إنشاء رمز الاستجابة السريع</a>.</div>
+            <div id="qrCode"></div>
+            <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
+        </li>
+        <li>
+            <p>
+                بمجرد مسح رمز الاستجابة السريع أو إدخال المفتاح أعلاه، سيقدم لك تطبيق المصادقة الثنائية رمزًا فريدًا. أدخل الرمز في صندوق التأكيد أدناه.
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="send-code" method="post">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Code" class="form-control" autocomplete="off" placeholder="يرجى إدخال الرمز." />
+                            <label asp-for="Input.Code" class="control-label form-label">رمز التحقق</label>
+                            <span asp-validation-for="Input.Code" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">التحقق</button>
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

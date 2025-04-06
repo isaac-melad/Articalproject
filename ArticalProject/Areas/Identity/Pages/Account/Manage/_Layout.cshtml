@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<!-- Font Awesome and Google Fonts imports -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Identity Manage Styles -->
+<link rel="stylesheet" href="~/css/identity/manage/manage-layout.css" />
+
+<div class="manage-account-container">
+    <div class="container py-5">
+        <div class="account-header mb-4">
+            <h1 class="text-primary fw-bold">
+                <i class="fas fa-user-shield me-2"></i>إدارة حسابك
+            </h1>
+            <p class="text-muted">يمكنك إدارة معلومات حسابك وتحديث إعداداتك</p>
+        </div>
+        <div class="settings-container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="nav-wrapper sticky-top" style="top: 20px;">
+                        <partial name="_ManageNav" />
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content-section">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="800px" viewBox="0 0 1440 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(720.000000, 400.000000) scale(1, -1) translate(-720.000000, -400.000000) " fill="#FFFFFF">
+            <circle opacity="0.05" cx="500" cy="150" r="40"></circle>
+            <circle opacity="0.05" cx="1200" cy="250" r="60"></circle>
+            <circle opacity="0.05" cx="300" cy="600" r="50"></circle>
+            <circle opacity="0.05" cx="900" cy="700" r="30"></circle>
+            <circle opacity="0.05" cx="1100" cy="500" r="70"></circle>
+            <circle opacity="0.05" cx="700" cy="300" r="45"></circle>
+            <circle opacity="0.05" cx="200" cy="400" r="35"></circle>
+            <circle opacity="0.05" cx="1300" cy="600" r="55"></circle>
+            <path d="M50,250 C150,150 250,50 350,150 C450,250 550,350 650,250 C750,150 850,50 950,150 C1050,250 1150,350 1250,250 C1350,150 1450,50 1550,150" stroke="#FFFFFF" stroke-width="2" opacity="0.05"></path>
+            <path d="M50,450 C150,350 250,250 350,350 C450,450 550,550 650,450 C750,350 850,250 950,350 C1050,450 1150,550 1250,450 C1350,350 1450,250 1550,350" stroke="#FFFFFF" stroke-width="2" opacity="0.05"></path>
+            <path d="M50,650 C150,550 250,450 350,550 C450,650 550,750 650,650 C750,550 850,450 950,550 C1050,650 1150,750 1250,650 C1350,550 1450,450 1550,550" stroke="#FFFFFF" stroke-width="2" opacity="0.05"></path>
+        </g>
+    </g>
+</svg>

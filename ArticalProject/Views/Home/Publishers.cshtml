@@ -1,0 +1,122 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "الناشرون - مقالاتي";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/publishers.css">
+}
+
+<div class="publishers-container">
+    <div class="publishers-header">
+        <h1 class="publishers-title">الناشرون</h1>
+        <p class="publishers-subtitle">تعرف على كتاب المحتوى المميزين في موقعنا</p>
+    </div>
+    
+    <div class="row">
+        <!-- Sample Publisher Card 1 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="publisher-card">
+                <div class="card-img-top bg-primary" style="height: 80px;"></div>
+                <img src="/img/profile.png" class="publisher-image" alt="اسم الناشر">
+                <div class="publisher-info">
+                    <h3 class="publisher-name">أحمد محمد</h3>
+                    <p class="publisher-bio">كاتب ومحرر محتوى متخصص في المجالات التقنية والعلمية، لديه خبرة أكثر من 5 سنوات في كتابة المقالات المتخصصة.</p>
+                    
+                    <div class="publisher-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">مقال</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1.2K</div>
+                            <div class="stat-label">مشاهدة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">تقييم</div>
+                        </div>
+                    </div>
+                    
+                    <div class="publisher-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sample Publisher Card 2 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="publisher-card">
+                <div class="card-img-top bg-secondary" style="height: 80px;"></div>
+                <img src="/img/profile.png" class="publisher-image" alt="اسم الناشر">
+                <div class="publisher-info">
+                    <h3 class="publisher-name">سارة أحمد</h3>
+                    <p class="publisher-bio">متخصصة في كتابة المحتوى الأدبي والثقافي، حاصلة على جوائز في مجال الكتابة الإبداعية والنقد الأدبي.</p>
+                    
+                    <div class="publisher-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">18</div>
+                            <div class="stat-label">مقال</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">950</div>
+                            <div class="stat-label">مشاهدة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.6</div>
+                            <div class="stat-label">تقييم</div>
+                        </div>
+                    </div>
+                    
+                    <div class="publisher-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sample Publisher Card 3 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="publisher-card">
+                <div class="card-img-top bg-info" style="height: 80px;"></div>
+                <img src="/img/profile.png" class="publisher-image" alt="اسم الناشر">
+                <div class="publisher-info">
+                    <h3 class="publisher-name">محمد علي</h3>
+                    <p class="publisher-bio">باحث ومحلل في مجال التكنولوجيا والذكاء الاصطناعي، يكتب مقالات تحليلية عن أحدث التطورات التقنية.</p>
+                    
+                    <div class="publisher-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">32</div>
+                            <div class="stat-label">مقال</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2.5K</div>
+                            <div class="stat-label">مشاهدة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">تقييم</div>
+                        </div>
+                    </div>
+                    
+                    <div class="publisher-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/publishers.js"></script>
+}

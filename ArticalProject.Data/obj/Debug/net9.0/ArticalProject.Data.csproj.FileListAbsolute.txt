@@ -1,0 +1,17 @@
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Data.deps.json
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Data.runtimeconfig.json
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Data.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Data.pdb
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Core.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\bin\Debug\net9.0\ArticalProject.Core.pdb
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.csproj.AssemblyReference.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.AssemblyInfoInputs.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.AssemblyInfo.cs
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.csproj.CoreCompileInputs.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalP.008548A2.Up2Date
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\refint\ArticalProject.Data.dll
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.pdb
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ArticalProject.Data.genruntimeconfig.cache
+C:\Users\isaac\Documents\ArticalProject\ArticalProject.Data\obj\Debug\net9.0\ref\ArticalProject.Data.dll

@@ -1,0 +1,143 @@
+/* Modern Login Page Styling */
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3a0ca3;
+    --accent-color: #f72585;
+    --text-color: #2b2d42;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --success-color: #4cc9f0;
+    --error-color: #f72585;
+}
+
+/* Arabic Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--light-gray);
+    direction: rtl;
+}
+
+.account-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, var(--light-gray) 0%, #e9ecef 100%);
+}
+
+.account-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: var(--white);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.account-header {
+    padding: 2rem;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+}
+
+.header-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.header-icon i {
+    color: var(--white);
+}
+
+.account-body {
+    padding: 2rem;
+}
+
+.account-input {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding-right: 3rem;
+    transition: all 0.3s ease;
+}
+
+.account-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
+
+.icon-inset {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    z-index: 2;
+}
+
+.account-btn {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.account-btn:hover {
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.account-alert {
+    border-radius: 0.5rem;
+}
+
+.account-links a {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.account-links a:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Password toggle */
+.password-toggle {
+    color: var(--primary-color);
+}
+
+.password-toggle:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .account-card {
+        margin: 0 1rem;
+    }
+}

@@ -1,0 +1,29 @@
+.image-preview-container {
+  margin-top: 1rem;
+}
+
+.current-profile-image {
+  max-width: 200px;
+  border-radius: 0.25rem;
+}
+
+.preview-image {
+  max-width: 200px;
+  border-radius: 0.25rem;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.start-0 {
+  left: 0;
+}

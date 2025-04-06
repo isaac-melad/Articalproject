@@ -1,0 +1,344 @@
+/* Modern Login Page Styling */
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3a0ca3;
+    --accent-color: #f72585;
+    --text-color: #2b2d42;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --success-color: #4cc9f0;
+    --error-color: #f72585;
+}
+
+/* Arabic Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--light-gray);
+    direction: rtl;
+}
+
+.account-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, var(--light-gray) 0%, #e9ecef 100%);
+    transition: all 0.3s ease;
+}
+
+/* Card Styling */
+.account-card {
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Header Styling */
+.account-header .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(67, 97, 238, 0.1);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.account-header .icon-wrapper:hover {
+    transform: scale(1.05);
+    background: rgba(67, 97, 238, 0.15);
+}
+
+.text-gradient {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Form Styling */
+.form-floating {
+    margin-bottom: 1.5rem;
+}
+
+.account-input {
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    padding: 1rem 1.25rem;
+    height: calc(3.5rem + 2px);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.account-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.15);
+}
+
+.icon-inset {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.form-floating:focus-within .icon-inset {
+    color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Button Styling */
+.account-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.account-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+}
+
+.account-btn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.account-btn:hover::after {
+    left: 50%;
+}
+
+/* Link Styling */
+.account-links a {
+    color: var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.account-links a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline !important;
+}
+
+/* Alert Styling */
+.account-alert {
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Animation */
+.animate {
+    animation-duration: 0.8s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+/* Form Check Styling */
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0.15em;
+    border-radius: 0.25em;
+    border: 2px solid #ced4da;
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .account-card {
+        padding: 2rem;
+    }
+
+    .account-input {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Enhanced Dark Mode Styles */
+.dark-mode .account-page {
+    background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-mode .account-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/pattern.svg');
+    background-size: cover;
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.dark-mode .account-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.dark-mode .account-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border-color: rgba(108, 142, 255, 0.2);
+}
+
+.dark-mode .account-header .icon-wrapper {
+    background: rgba(108, 142, 255, 0.15);
+    box-shadow: 0 5px 15px rgba(108, 142, 255, 0.1);
+}
+
+.dark-mode .account-header .icon-wrapper:hover {
+    background: rgba(108, 142, 255, 0.2);
+    transform: scale(1.05) rotate(5deg);
+}
+
+.dark-mode .text-gradient {
+    background: linear-gradient(to right, #6c8eff, #a742ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 2px 10px rgba(108, 142, 255, 0.2);
+}
+
+.dark-mode .account-input {
+    background-color: #2d2d2d;
+    border-color: #383838;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .account-input:focus {
+    border-color: #6c8eff;
+    box-shadow: 0 0 0 0.25rem rgba(108, 142, 255, 0.2);
+    background-color: #333333;
+}
+
+.dark-mode .form-label {
+    color: #b0b0b0;
+}
+
+.dark-mode .icon-inset {
+    color: #8a8a8a;
+}
+
+.dark-mode .form-floating:focus-within .icon-inset {
+    color: #6c8eff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.dark-mode .text-muted {
+    color: #8a8a8a !important;
+}
+
+.dark-mode .account-btn {
+    background: linear-gradient(135deg, #6c8eff 0%, #a742ff 100%);
+    border: none;
+}
+
+.dark-mode .account-btn:hover {
+    box-shadow: 0 8px 20px rgba(108, 142, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.dark-mode .account-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(108, 142, 255, 0.2);
+}
+
+.dark-mode .account-links a {
+    color: #6c8eff;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .account-links a:hover {
+    color: #a742ff;
+    text-decoration: underline !important;
+}
+
+.dark-mode .form-check-input {
+    border-color: #4d4d4d;
+    background-color: #2d2d2d;
+}
+
+.dark-mode .form-check-input:checked {
+    background-color: #6c8eff;
+    border-color: #6c8eff;
+    box-shadow: 0 0 0 0.15rem rgba(108, 142, 255, 0.25);
+}
+
+.dark-mode .form-check-label {
+    color: #b0b0b0;
+}
+
+.dark-mode .password-toggle {
+    color: #8a8a8a;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .password-toggle:hover {
+    color: #6c8eff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.dark-mode .alert-danger {
+    background-color: rgba(247, 37, 133, 0.15);
+    border-color: rgba(247, 37, 133, 0.25);
+    color: #ff6b95;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}

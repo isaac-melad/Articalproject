@@ -1,0 +1,326 @@
+/* Modern Components CSS - Additional styling for enhanced UI elements */
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  padding: 5rem 0;
+  margin-bottom: 3rem;
+  border-radius: 0 0 var(--section-border-radius) var(--section-border-radius);
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/pattern.svg');
+  background-size: cover;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+/* Feature Cards */
+.feature-card {
+  padding: 2rem;
+  border-radius: var(--card-border-radius);
+  background-color: var(--bg-light);
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.feature-card:hover::before {
+  height: 7px;
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  background-color: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.feature-text {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  padding: 2rem;
+  border-radius: var(--card-border-radius);
+  background-color: var(--bg-light);
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-light);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 4rem;
+  color: rgba(var(--primary-color-rgb), 0.1);
+  font-family: serif;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--dark-color);
+}
+
+.testimonial-role {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Stats Section */
+.stats-section {
+  padding: 4rem 0;
+  background-color: var(--bg-light-secondary);
+  border-radius: var(--section-border-radius);
+  margin: 3rem 0;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  padding: 4rem 0;
+  border-radius: var(--section-border-radius);
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/pattern.svg');
+  background-size: cover;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.cta-content {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-cta {
+  background-color: white;
+  color: var(--primary-color);
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: var(--btn-border-radius);
+  transition: all 0.3s ease;
+  border: 2px solid white;
+}
+
+.btn-cta:hover {
+  background-color: transparent;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Styles */
+.dark-mode .feature-card {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+
+.dark-mode .feature-icon {
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+  color: var(--dark-primary);
+}
+
+.dark-mode .feature-card:hover .feature-icon {
+  background-color: var(--dark-primary);
+  color: white;
+}
+
+.dark-mode .feature-title {
+  color: var(--dark-text);
+}
+
+.dark-mode .feature-text {
+  color: var(--dark-text-muted);
+}
+
+.dark-mode .testimonial-card {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+
+.dark-mode .testimonial-name {
+  color: var(--dark-text);
+}
+
+.dark-mode .testimonial-role {
+  color: var(--dark-text-muted);
+}
+
+.dark-mode .stats-section {
+  background-color: var(--dark-surface-lighter);
+}
+
+.dark-mode .stat-number {
+  color: var(--dark-primary);
+}
+
+.dark-mode .stat-label {
+  color: var(--dark-text-muted);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .feature-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-title {
+    font-size: 1.75rem;
+  }
+  
+  .cta-text {
+    font-size: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,495 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<style>
+    /* User Menu Styling */
+    .user-menu {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: var(--btn-border-radius);
+        padding: 8px 20px !important;
+        border: 1px solid rgba(var(--primary-color-rgb), 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .user-menu:hover {
+        background: rgba(var(--primary-color-rgb), 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(var(--primary-color-rgb), 0.12);
+        border-color: rgba(var(--primary-color-rgb), 0.3);
+    }
+
+    .user-menu:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(var(--primary-color-rgb), 0.1);
+    }
+
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+        border: none !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.05);
+        border-radius: var(--card-border-radius) !important;
+        margin-top: 12px !important;
+        min-width: 260px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transform-origin: top right;
+        overflow: hidden;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(var(--primary-color-rgb), 0.1) !important;
+        padding: 8px;
+    }
+
+    .dropdown-item {
+        padding: 12px 18px !important;
+        font-size: 0.95rem;
+        border-radius: 12px;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 4px 8px;
+        width: auto;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dropdown-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        opacity: 0;
+        transition: all 0.25s ease;
+        border-radius: 4px;
+    }
+
+    .dropdown-item:hover {
+        background: rgba(var(--primary-color-rgb), 0.08) !important;
+        transform: translateX(5px);
+        padding-left: 24px !important;
+    }
+
+    .dropdown-item:hover::before {
+        opacity: 1;
+    }
+
+    .dropdown-item i {
+        transition: all 0.3s ease;
+        width: 20px;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .dropdown-item:hover i {
+        transform: scale(1.2);
+    }
+
+    /* Login Button Styling */
+    .login-btn {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        border: none;
+        border-radius: var(--btn-border-radius);
+        color: white !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 10px 28px !important;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        box-shadow: 0 6px 15px rgba(var(--primary-color-rgb), 0.25);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .login-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(var(--primary-color-rgb), 0.4);
+    }
+
+    .login-btn:hover::before {
+        opacity: 1;
+    }
+
+    .login-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+    }
+
+    .login-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        position: relative;
+        width: 24px;
+        height: 24px;
+    }
+
+    .login-btn i {
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .login-icon-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+    }
+
+    .login-btn:hover .login-icon-wrapper::before {
+        width: 32px;
+        height: 32px;
+    }
+
+    .login-btn:hover i {
+        transform: translateX(-3px);
+        animation: pulse 1s ease infinite;
+    }
+
+    /* Register Button Styling */
+    .register-btn {
+        border: 2px solid var(--primary-color) !important;
+        color: var(--primary-color) !important;
+        border-radius: var(--btn-border-radius);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 10px 28px !important;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.1);
+        letter-spacing: 0.2px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .register-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.1) 0%, rgba(var(--accent-color), 0.1) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+    }
+
+    .register-btn:hover {
+        background: rgba(var(--primary-color-rgb), 0.05) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.15);
+        border-color: var(--primary-color) !important;
+    }
+
+    .register-btn:hover::before {
+        opacity: 1;
+    }
+
+    .register-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.1);
+    }
+
+    .register-btn i {
+        transition: all 0.3s ease;
+        margin-right: 8px;
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .register-btn:hover i {
+        transform: translateX(-3px) rotate(5deg);
+        filter: brightness(1.2);
+    }
+
+    /* Animation Classes */
+    .animate.slideIn {
+        animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+    }
+
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @@keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .navbar-nav {
+        gap: 15px;
+    }
+
+    .dropdown-divider {
+        border-color: rgba(0, 0, 0, 0.06);
+        margin: 8px 12px;
+    }
+
+    /* Logout Button Styling */
+    .text-danger {
+        color: var(--danger-500) !important;
+        transition: all 0.2s ease;
+    }
+
+    .text-danger:hover {
+        color: var(--danger-500) !important;
+        background: rgba(239, 68, 68, 0.08) !important;
+    }
+
+    .text-danger:hover i {
+        animation: pulse 0.5s ease infinite;
+    }
+
+    .nav-item i {
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover i {
+        transform: translateY(-2px);
+    }
+
+    /* User Avatar Styling */
+    .user-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        margin-right: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(var(--primary-color-rgb), 0.25);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .user-avatar::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: calc(100% + 20px);
+        height: calc(100% + 20px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 100%);
+        transform: rotate(45deg) translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .user-menu:hover .user-avatar {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 6px 15px rgba(var(--primary-color-rgb), 0.35);
+    }
+
+    .user-menu:hover .user-avatar::before {
+        transform: rotate(45deg) translateX(100%);
+    }
+
+    /* Dark Mode Compatibility */
+    .dark-mode .user-menu {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-color: rgba(var(--primary-color-rgb), 0.2);
+    }
+
+    .dark-mode .user-menu:hover {
+        background-color: rgba(var(--primary-color-rgb), 0.15);
+    }
+
+    .dark-mode .dropdown-menu {
+        background-color: var(--dark-surface);
+        border-color: var(--dark-border) !important;
+    }
+
+    .dark-mode .dropdown-item {
+        color: var(--dark-text);
+    }
+
+    .dark-mode .dropdown-item:hover {
+        background: rgba(var(--primary-color-rgb), 0.15) !important;
+    }
+
+    .dark-mode .dropdown-divider {
+        border-color: var(--dark-border);
+    }
+
+    .dark-mode .register-btn {
+        border-color: var(--dark-primary) !important;
+        color: var(--dark-primary) !important;
+    }
+
+    .dark-mode .register-btn:hover {
+        background: rgba(var(--primary-color-rgb), 0.15) !important;
+        border-color: var(--dark-primary) !important;
+    }
+
+    .dark-mode .register-btn i {
+        background: linear-gradient(135deg, var(--dark-primary), var(--dark-accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .dark-mode .text-danger:hover {
+        background: rgba(239, 68, 68, 0.15) !important;
+    }
+
+    .dark-mode .user-avatar {
+        border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* User Info Styling */
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .user-name {
+        font-weight: 700;
+        color: var(--dark-color);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .user-email {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .user-menu:hover .user-name {
+        color: var(--primary-color);
+    }
+
+    .dark-mode .user-name {
+        color: var(--dark-text);
+    }
+
+    .dark-mode .user-email {
+        color: var(--dark-text-muted);
+    }
+
+    .dark-mode .user-menu:hover .user-name {
+        color: var(--dark-primary);
+    }
+</style>
+
+<div class="login-section" style="font-family: Cairo, sans-serif">
+    <ul class="navbar-nav ms-auto">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle user-menu d-flex align-items-center" href="#" id="navbarDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @{
+                        var initials = User.Identity?.Name?.Split('@')[0]?.Substring(0, 1).ToUpper() ?? "U";
+                    }
+                    <div class="user-avatar">@initials</div>
+                    <div class="user-info">
+                        <span class="user-name">@(User.Identity?.Name?.Split('@')[0] ?? "User")</span>
+                        <span class="user-email">@User.Identity?.Name</span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item py-2 d-flex align-items-center" asp-area="Identity"
+                            asp-page="/Account/Manage/Index" title="إدارة">
+                            <i class="fas fa-cog me-3 fa-fw" style="color: #5D76E0"></i>
+                            <span>إدارة الحساب</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                            asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="dropdown-item py-2 d-flex align-items-center text-danger">
+                                <i class="fas fa-sign-out-alt me-3 fa-fw"></i>
+                                <span>تسجيل الخروج</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link register-btn" asp-area="Identity" asp-page="/Account/Register">
+                    <i class="fas fa-user-plus"></i>اشتراك
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link login-btn" asp-area="Identity" asp-page="/Account/Login">
+                    <span class="login-icon-wrapper">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </span>
+                    تسجيل الدخول
+                </a>
+            </li>
+        }
+    </ul>
+</div>

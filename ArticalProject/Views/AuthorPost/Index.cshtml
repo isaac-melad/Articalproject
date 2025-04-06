@@ -1,0 +1,168 @@
+@model IEnumerable<ArticalProject.Core.Models.AuthorPost>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/authorpost.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<div class="category-container" style="font-family: 'Cairo', sans-serif;" dir="rtl">
+    <div class="container py-4">
+        <div class="card post-card border-0 shadow-lg animate__animated animate__fadeIn">
+            <div class="card-header bg-primary text-white py-4 rounded-top-3 position-relative overflow-hidden">
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary-gradient"></div>
+                <div class="d-flex justify-content-between align-items-center position-relative">
+                    <div class="d-flex align-items-center gap-3 animate__animated animate__fadeInRight">
+                        <div class="header-icon-wrapper">
+                            <i class="bi bi-file-text-fill fs-2"></i>
+                        </div>
+                        <div>
+                            <h1 class="h3 mb-0 fw-bold">قائمة المنشورات</h1>
+                            <span class="badge bg-white text-primary fs-6 mt-1 shadow-sm">@Model.Count() منشور</span>
+                        </div>
+                    </div>
+                    <a asp-action="Create" class="btn btn-light btn-create animate__animated animate__fadeInLeft">
+                        <i class="bi bi-plus-lg me-2"></i>
+                        إنشاء منشور جديد
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                @if (TempData["InfoMessage"] != null)
+                {
+                    <div class="alert alert-info alert-dismissible fade show mb-4" role="alert">
+                        @TempData["InfoMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <div class="row mb-4 animate__animated animate__fadeInUp">
+                    <div class="col-12">
+                        <form asp-action="Index" method="get" class="search-form position-relative">
+                            <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                                <span class="input-group-text bg-transparent border-0 ps-4">
+                                    <i class="bi bi-search text-muted"></i>
+                                </span>
+                                <input type="search" name="searchTerm" class="form-control form-control-lg border-0 py-3" placeholder="ابحث عن منشور...">
+                                <button class="btn btn-primary rounded-end-pill px-4" type="submit">
+                                    بحث
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                @if (Model.Any())
+                {
+                    <div class="table-container animate__animated animate__fadeIn animate__delay-1s">
+                        <div class="table-responsive rounded-3 border shadow">
+                            <table class="table table-hover mb-0 align-middle posts-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="fw-bold p-3 border-bottom">الصورة</th>
+                                        <th class="fw-bold p-3 border-bottom">العنوان</th>
+                                        <th class="fw-bold p-3 border-bottom">المؤلف</th>
+                                        <th class="fw-bold p-3 border-bottom">التاريخ</th>
+                                        <th class="fw-bold text-end p-3 border-bottom" style="min-width: 150px;">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var post in Model)
+                                    {
+                                        <tr class="post-row">
+                                            <td class="p-3" style="width: 100px;">
+                                                @if (!string.IsNullOrEmpty(post.PostImageUrl))
+                                                {
+                                                    <div class="post-image-card shadow-sm">
+                                                        <img src="@post.PostImageUrl" alt="@post.PostTitle" class="img-fluid rounded" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="post-image-placeholder rounded d-flex align-items-center justify-content-center bg-light shadow-sm">
+                                                        <i class="bi bi-image text-muted"></i>
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td class="p-3">
+                                                <div class="post-title fw-bold mb-1">@post.PostTitle</div>
+                                                <div class="post-excerpt text-muted small">@(post.Content?.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</div>
+                                                <div class="post-badges mt-2">
+                                                    <span class="badge bg-light text-primary border border-primary-subtle">منشور</span>
+                                                </div>
+                                            </td>
+                                            <td class="p-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="author-avatar me-2 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                                        @(post.Author?.FullName?.Substring(0, 1).ToUpper() ?? "U")
+                                                    </div>
+                                                    <span>@post.Author?.FullName</span>
+                                                </div>
+                                            </td>
+                                            <td class="p-3">
+                                                <div class="date-badge">
+                                                    <i class="bi bi-calendar-date me-1 text-muted"></i>
+                                                    @post.CreatedAt.ToString("dd/MM/yyyy")
+                                                </div>
+                                            </td>
+                                            <td class="text-end p-3">
+                                                <div class="action-buttons d-flex gap-2 justify-content-end">
+                                                    <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-sm btn-light action-btn shadow-sm" data-bs-toggle="tooltip" title="عرض التفاصيل">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                    <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-light action-btn shadow-sm" data-bs-toggle="tooltip" title="تعديل">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-sm btn-light action-btn text-danger shadow-sm" data-bs-toggle="tooltip" title="حذف">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="pagination-container p-3 border-top bg-light">
+                                <partial name="_Pagination" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state-container text-center py-5 animate__animated animate__fadeIn animate__delay-1s">
+                        <div class="empty-state-icon mb-4">
+                            <i class="bi bi-journal-text display-1 text-muted"></i>
+                        </div>
+                        <h3 class="mb-3">لا يوجد منشورات لعرضها حالياً</h3>
+                        <p class="text-muted mb-4">ابدأ بإنشاء منشورات جديدة لعرضها في هذه الصفحة</p>
+                        <a asp-action="Create" class="btn btn-primary btn-lg px-5 py-3 shadow-lg">
+                            <i class="bi bi-plus-lg me-2"></i>
+                            إنشاء منشور جديد
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/authorpost.js"></script>
+}
